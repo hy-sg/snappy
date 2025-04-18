@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snappy | Reaction Video App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .iphone-screen {
+            width: 390px;
+            height: 844px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 40px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .iphone-notch {
+            width: 150px;
+            height: 30px;
+            background: black;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            z-index: 10;
+        }
+        .tiktok-bg {
+            background-image: url('https://i.pinimg.com/originals/6a/73/e0/6a73e0304435141be55da74d45a12500.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .recording-pulse {
+            animation: pulse 1.5s infinite;
+        }
+        .face-overlay {
+            position: absolute;
+            bottom: 100px;
+            right: 20px;
+            width: 140px;
+            height: 180px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 3px solid white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+        }
+    </style>
+</head>
+<body class="font-inter bg-gray-100 p-4">
+
+
+       <!-- SCREEN A1: Content Preferences -->
+       <div class="iphone-screen bg-white">
+        <div class="iphone-notch"></div>
+        <div class="absolute top-4 left-4 right-4 flex justify-between items-center">
+            <img src="https://cdn.logojoy.com/wp-content/uploads/20220329171603/dating-app-logo-example.jpg" class="h-7">
+            <button class="text-gray-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                </svg>
+            </button>
+        </div>
+        
+        <div class="h-full p-6 pt-16 overflow-y-auto">
+            <h2 class="text-xl font-bold text-gray-800 mb-6">What type of reaction video do you usually create?</h2>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <!-- News -->
+                <button class="bg-white border border-gray-200 rounded-xl p-4 flex flex-col items-center hover:bg-indigo-50 transition">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                        </svg>
+                    </div>
+                    <span class="text-sm font-medium">News</span>
+                </button>
+                
+                <!-- Trending Videos -->
+                <button class="bg-white border border-gray-200 rounded-xl p-4 flex flex-col items-center hover:bg-indigo-50 transition">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <span class="text-sm font-medium">Trending Videos</span>
+                </button>
+                
+                <!-- Trending Music -->
+                <button class="bg-white border border-gray-200 rounded-xl p-4 flex flex-col items-center hover:bg-indigo-50 transition">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                        </svg>
+                    </div>
+                    <span class="text-sm font-medium">Trending Music</span>
+                </button>
+                
+                <!-- Movies -->
+                <button class="bg-white border border-gray-200 rounded-xl p-4 flex flex-col items-center hover:bg-indigo-50 transition">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
+                        </svg>
+                    </div>
+                    <span class="text-sm font-medium">Movies</span>
+                </button>
+                
+                <!-- Dances -->
+                <button class="bg-white border border-gray-200 rounded-xl p-4 flex flex-col items-center hover:bg-indigo-50 transition">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 3a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0V7h-1a1 1 0 110-2h1V4a1 1 0 011-1z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7v1a1 1 0 01-1 1h-1v1a1 1 0 11-2 0V9h-1a1 1 0 110-2h1V6a1 1 0 011-1h1a1 1 0 011 1zM9 9a2 2 0 114 0v5a2 2 0 11-4 0V9z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a2 2 0 002 2h1v1a1 1 0 11-2 0v-1z" />
+                        </svg>
+                    </div>
+                    <span class="text-sm font-medium">Dances</span>
+                </button>
+                
+                <!-- Gaming -->
+                <button class="bg-white border border-gray-200 rounded-xl p-4 flex flex-col items-center hover:bg-indigo-50 transition">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </div>
+                    <span class="text-sm font-medium">Gaming</span>
+                </button>
+                
+                <!-- Arts -->
+                <button class="bg-white border border-gray-200 rounded-xl p-4 flex flex-col items-center hover:bg-indigo-50 transition">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                        </svg>
+                    </div>
+                    <span class="text-sm font-medium">Arts</span>
+                </button>
+            </div>
+            
+            <button class="w-full mt-8 bg-indigo-600 text-white py-3 px-4 rounded-lg font-medium">
+                Continue
+            </button>
+        </div>
+    </div>
+
+ <!-- SCREEN A2: Trending by Platform -->
+ <div class="iphone-screen bg-white">
+    <div class="iphone-notch"></div>
+    <div class="absolute top-4 left-4 right-4 flex justify-between items-center">
+        <img src="https://cdn.logojoy.com/wp-content/uploads/20220329171603/dating-app-logo-example.jpg" 
+             class="h-7">
+        <button class="text-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+            </svg>
+        </button>
+    </div>
+    
+    <div class="h-full p-6 pt-16 overflow-y-auto">
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Trending Videos to React To</h2>
+        
+        <!-- TikTok Section -->
+        <div class="mb-8">
+            <div class="flex items-center mb-3">
+                <img src="https://logolook.net/wp-content/uploads/2021/06/Symbol-Tiktok.png" 
+                     class="h-5 mr-2">
+                <h3 class="font-medium text-gray-700">TikTok</h3>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <img src="https://i.pinimg.com/originals/6a/73/e0/6a73e0304435141be55da74d45a12500.jpg" class="w-full h-40 object-cover">
+                    <div class="p-3">
+                        <h4 class="font-medium text-gray-800 text-sm truncate">Crazy pets</h4>
+                        <p class="text-gray-500 text-xs">1.4M reactions</p>
+                        <button class="mt-2 w-full bg-indigo-600 text-white py-2 px-3 rounded-lg text-xs font-medium">
+                            React
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <img src="https://picsum.photos/175/250?random=62" class="w-full h-40 object-cover">
+                    <div class="p-3">
+                        <h4 class="font-medium text-gray-800 text-sm truncate">Comedy Skit</h4>
+                        <p class="text-gray-500 text-xs">928K reactions</p>
+                        <button class="mt-2 w-full bg-indigo-600 text-white py-2 px-3 rounded-lg text-xs font-medium">
+                            React
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- YouTube Section -->
+        <div class="mb-8">
+            <div class="flex items-center mb-3">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" 
+                     class="h-5 mr-2">
+                <h3 class="font-medium text-gray-700">YouTube</h3>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <img src="https://picsum.photos/175/250?random=63" class="w-full h-40 object-cover">
+                    <div class="p-3">
+                        <h4 class="font-medium text-gray-800 text-sm truncate">Cooking Hack</h4>
+                        <p class="text-gray-500 text-xs">756K reactions</p>
+                        <button class="mt-2 w-full bg-indigo-600 text-white py-2 px-3 rounded-lg text-xs font-medium">
+                            React
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <img src="https://picsum.photos/175/250?random=64" class="w-full h-40 object-cover">
+                    <div class="p-3">
+                        <h4 class="font-medium text-gray-800 text-sm truncate">DIY Project</h4>
+                        <p class="text-gray-500 text-xs">612K reactions</p>
+                        <button class="mt-2 w-full bg-indigo-600 text-white py-2 px-3 rounded-lg text-xs font-medium">
+                            React
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Instagram Section -->
+        <div class="mb-8">
+            <div class="flex items-center mb-3">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" 
+                     class="h-5 mr-2">
+                <h3 class="font-medium text-gray-700">Instagram</h3>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <img src="https://picsum.photos/175/250?random=65" class="w-full h-40 object-cover">
+                    <div class="p-3">
+                        <h4 class="font-medium text-gray-800 text-sm truncate">Travel Vlog</h4>
+                        <p class="text-gray-500 text-xs">892K reactions</p>
+                        <button class="mt-2 w-full bg-indigo-600 text-white py-2 px-3 rounded-lg text-xs font-medium">
+                            React
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <img src="https://picsum.photos/175/250?random=66" class="w-full h-40 object-cover">
+                    <div class="p-3">
+                        <h4 class="font-medium text-gray-800 text-sm truncate">Fashion Tips</h4>
+                        <p class="text-gray-500 text-xs">1.1M reactions</p>
+                        <button class="mt-2 w-full bg-indigo-600 text-white py-2 px-3 rounded-lg text-xs font-medium">
+                            React
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- SCREEN A3: Reaction View (same background as Screen 1) -->
+    <div class="iphone-screen bg-black">
+        <div class="iphone-notch"></div>
+        <div class="tiktok-bg absolute inset-0 opacity-70"></div>
+        
+        <div class="absolute top-4 left-4 right-4 flex justify-between items-center z-20">
+            <img src="https://cdn.logojoy.com/wp-content/uploads/20220329171603/dating-app-logo-example.jpg" 
+                 class="h-7">
+            <button class="text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Creator Face Overlay -->
+        <div class="face-overlay">
+            <img src="https://thumbs.dreamstime.com/b/black-woman-afro-hair-laughing-face-expression-studio-background-self-love-empowerment-acceptance-zoom-smile-happy-261505565.jpg" 
+                 class="w-full h-full object-cover">
+            <div class="absolute top-2 left-2 flex items-center bg-black bg-opacity-70 px-2 py-1 rounded-full">
+                <div class="w-2 h-2 bg-red-500 rounded-full mr-1"></div>
+                <span class="text-white text-xs">00:15</span>
+            </div>
+            <div class="absolute bottom-2 left-2 right-2 h-1.5 bg-gray-300/30 rounded-full overflow-hidden">
+                <div class="h-full bg-green-400 rounded-full" style="width: 75%"></div>
+            </div>
+        </div>
+        
+        <!-- Recording Controls -->
+        <div class="absolute bottom-8 left-0 right-0 flex justify-center space-x-8 z-20">
+            <button class="bg-white p-3 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                </svg>
+            </button>
+            <button class="bg-red-500 p-5 rounded-full recording-pulse">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15.536a5 5 0 001.414 1.414m2.828-9.9a9 9 0 012.728-2.728" />
+                </svg>
+            </button>
+            <button class="bg-white p-3 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- SCREEN A4: Platform Selection -->
+    <div class="iphone-screen bg-white">
+        <div class="iphone-notch"></div>
+        <div class="absolute top-4 left-4 right-4 flex justify-between items-center">
+            <img src="https://cdn.logojoy.com/wp-content/uploads/20220329171603/dating-app-logo-example.jpg" 
+                 class="h-7">
+            <button class="text-gray-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                </svg>
+            </button>
+        </div>
+        
+        <div class="h-full p-6 pt-16">
+            <h2 class="text-xl font-bold text-gray-800 mb-6">Share Your Reaction</h2>
+              
+            <div class="mb-8">
+                <h3 class="font-medium text-gray-700 mb-3">Platforms</h3>
+                <div class="grid grid-cols-3 gap-3">
+                    <button class="bg-gray-100 rounded-lg p-3 flex flex-col items-center border border-gray-200">
+                        <img src="https://logos-world.net/wp-content/uploads/2020/04/TikTok-Logo-2018-present.jpg" 
+                             class="w-11 h-11">
+                        <span class="text-xs mt-2">TikTok</span>
+                    </button>
+                    <button class="bg-gray-100 rounded-lg p-3 flex flex-col items-center border border-gray-200">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" 
+                             class="w-11 h-11 bg-white p-1 rounded">
+                        <span class="text-xs mt-2">YouTube</span>
+                    </button>
+                    <button class="bg-gray-100 rounded-lg p-3 flex flex-col items-center border border-gray-200">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" 
+                             class="w-11 h-11 p-2">
+                        <span class="text-xs mt-2">Instagram</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="font-medium text-gray-700 mb-3">Schedule</h3>
+                <div class="flex space-x-3">
+                    <button class="flex-1 bg-indigo-600 text-white py-3 px-4 rounded-lg font-medium">
+                        Post Now
+                    </button>
+                    <button class="flex-1 bg-white border border-gray-300 py-3 px-4 rounded-lg font-medium">
+                        Schedule
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCREEN A5: Confirmation -->
+    <div class="iphone-screen bg-white">
+        <div class="iphone-notch"></div>
+        <div class="absolute top-4 left-4 right-4 flex justify-between items-center">
+            <img src="https://cdn.logojoy.com/wp-content/uploads/20220329171603/dating-app-logo-example.jpg" 
+                 class="h-7">
+            <button class="text-gray-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                </svg>
+            </button>
+        </div>
+        
+        <div class="h-full flex flex-col items-center justify-center p-8 pt-16">
+            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            <h2 class="text-xl font-bold text-gray-800 mb-2">Reaction Posted!</h2>
+            <p class="text-gray-500 mb-6 text-center">Your video is now being shared.</p>
+            <button class="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg font-medium">
+                View Analytics
+            </button>
+            <button class="w-full mt-4 bg-white border border-gray-300 py-3 px-4 rounded-lg font-medium">
+                Create Another
+            </button>
+        </div>
+    </div>
+
+    <!-- SCREEN B1: TikTok Share Screen -->
+    <div class="iphone-screen bg-black">
+        <div class="iphone-notch"></div>
+        <div class="tiktok-bg absolute inset-0"></div>
+
+         <!-- Header with TikTok Logo -->
+    <div class="absolute top-4 left-4 right-4 flex justify-between items-center z-20">
+        <div class="flex items-center">
+            <img src="https://www.citypng.com/public/uploads/preview/tiktok-circle-round-logo-brand-video-tik-tok-7017516947932520ecgdidi6e.png" 
+                 class="h-5 mr-2" 
+                 alt="TikTok">
+            <div class="text-white font-bold text-lg">For You</div>
+        </div>
+        <button class="text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+            </svg>
+        </button>
+    </div>
+
+
+
+        <!-- Right side buttons -->
+        <div class="absolute right-4 bottom-36 flex flex-col items-center space-y-6 text-white">
+            <div class="text-center">
+                <img src="https://picsum.photos/48?random=1" class="w-12 h-12 rounded-full border-2 border-white">
+                <div class="mt-4 flex flex-col items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                    <span class="text-xs mt-1">326.5K</span>
+                </div>
+            </div>
+            <button class="text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                    <polyline points="16 6 12 2 8 6"></polyline>
+                    <line x1="12" y1="2" x2="12" y2="15"></line>
+                </svg>
+                <span class="text-xs block mt-1">Share</span>
+            </button>
+        </div>
+
+        <!-- Share Sheet -->
+        <div class="absolute bottom-0 left-0 right-0 bg-gray-900 bg-opacity-95 p-4 rounded-t-2xl z-30">
+            <h3 class="text-white font-medium text-lg mb-4">Share to</h3>
+            <div class="grid grid-cols-4 gap-4 pb-4">
+                <button class="flex flex-col items-center">
+                    <img src="https://cdn.logojoy.com/wp-content/uploads/20220329171603/dating-app-logo-example.jpg" 
+                         class="w-14 h-14 rounded-xl bg-indigo-100 p-2">
+                    <span class="text-white text-xs mt-2">Snappy</span>
+                </button>
+                <button class="flex flex-col items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" 
+                         class="w-14 h-14 bg-white rounded-xl p-2">
+                    <span class="text-white text-xs mt-2">YouTube</span>
+                </button>
+                <button class="flex flex-col items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg"
+                         class="w-14 h-14 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl p-3">
+                    <span class="text-white text-xs mt-2">Instagram</span>
+                </button>
+                <button class="flex flex-col items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/X_logo_2023_%28white%29.png"
+                         class="w-14 h-14 bg-black rounded-xl p-3">
+                    <span class="text-white text-xs mt-2">Twitter</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCREEN B2: Downloading -->
+    <div class="iphone-screen bg-white">
+        <div class="iphone-notch"></div>
+        <div class="absolute top-4 left-4 right-4 flex justify-between items-center">
+            <img src="https://cdn.logojoy.com/wp-content/uploads/20220329171603/dating-app-logo-example.jpg" 
+                 class="h-7">
+            <button class="text-gray-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                </svg>
+            </button>
+        </div>
+        
+        <div class="h-full flex flex-col items-center justify-center px-8">
+            <div class="w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+            </div>
+            <h2 class="text-xl font-bold text-gray-800 mb-2">Downloading Video</h2>
+            <p class="text-gray-500 mb-6 text-center">Preparing your reaction recording...</p>
+            <div class="w-full bg-gray-200 rounded-full h-2 mb-8">
+                <div class="bg-green-500 h-2 rounded-full" style="width: 45%"></div>
+            </div>
+            <button class="w-full bg-gray-100 border border-gray-300 py-3 rounded-lg font-medium">
+                Cancel
+            </button>
+        </div>
+    </div>
+
+    <!-- SCREEN B3: Reaction View (same background as Screen 1) -->
+    <div class="iphone-screen bg-black">
+        <div class="iphone-notch"></div>
+        <div class="tiktok-bg absolute inset-0 opacity-70"></div>
+        
+        <div class="absolute top-4 left-4 right-4 flex justify-between items-center z-20">
+            <img src="https://cdn.logojoy.com/wp-content/uploads/20220329171603/dating-app-logo-example.jpg" 
+                 class="h-7">
+            <button class="text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Creator Face Overlay -->
+        <div class="face-overlay">
+            <img src="https://thumbs.dreamstime.com/b/black-woman-afro-hair-laughing-face-expression-studio-background-self-love-empowerment-acceptance-zoom-smile-happy-261505565.jpg" 
+                 class="w-full h-full object-cover">
+            <div class="absolute top-2 left-2 flex items-center bg-black bg-opacity-70 px-2 py-1 rounded-full">
+                <div class="w-2 h-2 bg-red-500 rounded-full mr-1"></div>
+                <span class="text-white text-xs">00:15</span>
+            </div>
+            <div class="absolute bottom-2 left-2 right-2 h-1.5 bg-gray-300/30 rounded-full overflow-hidden">
+                <div class="h-full bg-green-400 rounded-full" style="width: 75%"></div>
+            </div>
+        </div>
+        
+        <!-- Recording Controls -->
+        <div class="absolute bottom-8 left-0 right-0 flex justify-center space-x-8 z-20">
+            <button class="bg-white p-3 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                </svg>
+            </button>
+            <button class="bg-red-500 p-5 rounded-full recording-pulse">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15.536a5 5 0 001.414 1.414m2.828-9.9a9 9 0 012.728-2.728" />
+                </svg>
+            </button>
+            <button class="bg-white p-3 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- SCREEN B4: Platform Selection -->
+    <div class="iphone-screen bg-white">
+        <div class="iphone-notch"></div>
+        <div class="absolute top-4 left-4 right-4 flex justify-between items-center">
+            <img src="https://cdn.logojoy.com/wp-content/uploads/20220329171603/dating-app-logo-example.jpg" 
+                 class="h-7">
+            <button class="text-gray-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                </svg>
+            </button>
+        </div>
+        
+        <div class="h-full p-6 pt-16">
+            <h2 class="text-xl font-bold text-gray-800 mb-6">Share Your Reaction</h2>
+              
+            <div class="mb-8">
+                <h3 class="font-medium text-gray-700 mb-3">Platforms</h3>
+                <div class="grid grid-cols-3 gap-3">
+                    <button class="bg-gray-100 rounded-lg p-3 flex flex-col items-center border border-gray-200">
+                        <img src="https://logos-world.net/wp-content/uploads/2020/04/TikTok-Logo-2018-present.jpg" 
+                             class="w-11 h-11">
+                        <span class="text-xs mt-2">TikTok</span>
+                    </button>
+                    <button class="bg-gray-100 rounded-lg p-3 flex flex-col items-center border border-gray-200">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" 
+                             class="w-11 h-11 bg-white p-1 rounded">
+                        <span class="text-xs mt-2">YouTube</span>
+                    </button>
+                    <button class="bg-gray-100 rounded-lg p-3 flex flex-col items-center border border-gray-200">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" 
+                             class="w-11 h-11 p-2">
+                        <span class="text-xs mt-2">Instagram</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="font-medium text-gray-700 mb-3">Schedule</h3>
+                <div class="flex space-x-3">
+                    <button class="flex-1 bg-indigo-600 text-white py-3 px-4 rounded-lg font-medium">
+                        Post Now
+                    </button>
+                    <button class="flex-1 bg-white border border-gray-300 py-3 px-4 rounded-lg font-medium">
+                        Schedule
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCREEN B5: Confirmation -->
+    <div class="iphone-screen bg-white">
+        <div class="iphone-notch"></div>
+        <div class="absolute top-4 left-4 right-4 flex justify-between items-center">
+            <img src="https://cdn.logojoy.com/wp-content/uploads/20220329171603/dating-app-logo-example.jpg" 
+                 class="h-7">
+            <button class="text-gray-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                </svg>
+            </button>
+        </div>
+        
+        <div class="h-full flex flex-col items-center justify-center p-8 pt-16">
+            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            <h2 class="text-xl font-bold text-gray-800 mb-2">Reaction Posted!</h2>
+            <p class="text-gray-500 mb-6 text-center">Your video is now being shared.</p>
+            <button class="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg font-medium">
+                View Analytics
+            </button>
+            <button class="w-full mt-4 bg-white border border-gray-300 py-3 px-4 rounded-lg font-medium">
+                Create Another
+            </button>
+        </div>
+    </div>
+
+ 
+</body>
+</html>

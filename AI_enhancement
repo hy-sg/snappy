@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Video Enhancement | VideoMagic</title>
+    <meta name="description" content="Enhance your videos with AI - improve voice quality, remove filler words, and more.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-indigo-600">VideoMagic</h1>
+                <nav>
+                    <ul class="flex space-x-6">
+                        <li><a href="#" class="text-gray-600 hover:text-indigo-600">Features</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-indigo-600">Pricing</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        <section class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-800 mb-4">AI Enhancement of Your Video</h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">Record your video → AI acts like a filter to improve quality and remove imperfections</p>
+        </section>
+
+        <div class="grid md:grid-cols-3 gap-8 mb-16">
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <div class="text-indigo-500 text-3xl mb-4">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">1. Record Video</h3>
+                <p class="text-gray-600">Film yourself naturally - don't worry about mistakes</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <div class="text-indigo-500 text-3xl mb-4">
+                    <i class="fas fa-magic"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">2. AI Enhancement</h3>
+                <p class="text-gray-600">Our AI removes filler words, hesitations, and improves voice quality</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <div class="text-indigo-500 text-3xl mb-4">
+                    <i class="fas fa-share-square"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">3. Publish Polished Video</h3>
+                <p class="text-gray-600">Share your professional-quality video with confidence</p>
+            </div>
+        </div>
+
+        <div class="bg-white p-8 rounded-xl shadow-lg max-w-3xl mx-auto">
+            <h3 class="text-2xl font-semibold mb-6 text-center">Enhance Your Video</h3>
+            <div class="grid gap-6">
+                <div>
+                    <label class="block text-gray-700 mb-2">Upload Video</label>
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+                        <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-2"></i>
+                        <p class="text-gray-500">Drag & drop your video file here</p>
+                        <button class="mt-4 bg-indigo-100 text-indigo-600 px-4 py-2 rounded-md">Select File</button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-gray-700 mb-2">Enhancement Options</label>
+                        <select class="w-full p-3 border rounded-lg">
+                            <option>Basic Cleanup</option>
+                            <option>Professional Polish</option>
+                            <option>Full Transformation</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2">Output Format</label>
+                        <select class="w-full p-3 border rounded-lg">
+                            <option>MP4 (Recommended)</option>
+                            <option>MOV</option>
+                            <option>GIF</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="bg-indigo-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-indigo-700 transition">
+                    Enhance Video Now
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>© 2023 VideoMagic. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
